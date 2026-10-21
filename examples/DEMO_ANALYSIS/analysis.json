@@ -1,0 +1,231 @@
+{
+  "IMPORTANT": "Real benchmarks must be run externally. This script analyzes supplied pass/fail records only. Oracle and observed-utility greedy are retrospective and are not deployable.",
+  "num_results": 240,
+  "num_manifest_tasks": 3,
+  "num_analyzed_tasks": 3,
+  "num_incomplete_tasks": 0,
+  "exploratory_thresholds": {
+    "positive_interaction": 0.2,
+    "complementary_single_max": 0.2,
+    "complementary_pair_min": 0.8,
+    "swing_strong_spread": 0.4
+  },
+  "overall": {
+    "num_tasks": 3,
+    "metrics": {
+      "swing_raw": {
+        "mean": 0.6667,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "swing_strong_exploratory": {
+        "mean": 0.6667,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "has_positive_interaction": {
+        "mean": 0.3333,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "has_complementary_pair": {
+        "mean": 0.3333,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_headroom": {
+        "mean": 0.6667,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "greedy_regret": {
+        "mean": 0.3333,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "topk_utility": {
+        "mean": 0.3333,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      },
+      "oracle_utility": {
+        "mean": 1.0,
+        "95pct_task_bootstrap": [
+          1.0,
+          1.0
+        ]
+      },
+      "greedy_utility": {
+        "mean": 0.6667,
+        "95pct_task_bootstrap": [
+          0.0,
+          1.0
+        ]
+      }
+    }
+  },
+  "per_dataset": {
+    "SYNTHETIC": {
+      "num_tasks": 3,
+      "metrics": {
+        "swing_raw": {
+          "mean": 0.6667,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "swing_strong_exploratory": {
+          "mean": 0.6667,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "has_positive_interaction": {
+          "mean": 0.3333,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "has_complementary_pair": {
+          "mean": 0.3333,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "oracle_headroom": {
+          "mean": 0.6667,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "greedy_regret": {
+          "mean": 0.3333,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "topk_utility": {
+          "mean": 0.3333,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        },
+        "oracle_utility": {
+          "mean": 1.0,
+          "95pct_task_bootstrap": [
+            1.0,
+            1.0
+          ]
+        },
+        "greedy_utility": {
+          "mean": 0.6667,
+          "95pct_task_bootstrap": [
+            0.0,
+            1.0
+          ]
+        }
+      }
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "DEMO_synergy",
+      "dataset": "SYNTHETIC",
+      "group": "demo",
+      "swing_raw": 1,
+      "swing_spread": 1.0,
+      "swing_strong_exploratory": 1,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 1.0,
+      "oracle_subset": "r3+r4",
+      "oracle_headroom": 1.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 1.0,
+      "interaction_max": 1.0,
+      "positive_interaction_pairs": 1,
+      "tested_pairs": 10,
+      "has_positive_interaction": 1,
+      "complementary_pairs_exploratory": [
+        "r3+r4"
+      ],
+      "has_complementary_pair": 1,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "DEMO_constant",
+      "dataset": "SYNTHETIC",
+      "group": "demo",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 1.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 1.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 1.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "DEMO_retrieval_error",
+      "dataset": "SYNTHETIC",
+      "group": "demo",
+      "swing_raw": 1,
+      "swing_spread": 1.0,
+      "swing_strong_exploratory": 1,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 1.0,
+      "oracle_subset": "r5",
+      "oracle_headroom": 1.0,
+      "greedy_utility": 1.0,
+      "greedy_subset": "r1+r5",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    }
+  ],
+  "incomplete": []
+}
