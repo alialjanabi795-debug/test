@@ -1,0 +1,7 @@
+numpy>=1.26
+pillow>=10
+scikit-learn>=1.4
+matplotlib>=3.8
+pandas>=2.1
+pyarrow>=14
+imagecodecs>=2024.1.1   # optional: JPEG XL via libjxl
