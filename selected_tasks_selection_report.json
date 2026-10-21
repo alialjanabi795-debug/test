@@ -1,0 +1,156 @@
+{
+ "rule": "library subset of stdlib, no side-effect libs, >=1 canonical doc, file order",
+ "side_effect_libs": [
+  "filecmp",
+  "ftplib",
+  "glob",
+  "io",
+  "multiprocessing",
+  "os",
+  "pathlib",
+  "requests",
+  "shutil",
+  "signal",
+  "socket",
+  "sqlite3",
+  "subprocess",
+  "sys",
+  "tempfile",
+  "time",
+  "urllib"
+ ],
+ "candidates_in_order": [
+  "10_26153795",
+  "15_29784889",
+  "21_2195340",
+  "27_15405636",
+  "32_40133826",
+  "38_1592158",
+  "48_20573459",
+  "51_23164058",
+  "55_11236006",
+  "64_4172131",
+  "65_6677332",
+  "74_17238587",
+  "76_15534223",
+  "78_18168684",
+  "80_19068269",
+  "82_30693804",
+  "83_30693804",
+  "94_18785032",
+  "95_1450897",
+  "102_2600191",
+  "103_2600191",
+  "117_3880399",
+  "127_22882922",
+  "150_9760588"
+ ],
+ "reference_check": {
+  "10_26153795": {
+   "passed": true,
+   "result": "passed"
+  },
+  "15_29784889": {
+   "passed": false,
+   "result": "failed: inconsistent use of tabs and spaces in indentation (<string>, line 5)"
+  },
+  "21_2195340": {
+   "passed": true,
+   "result": "passed"
+  },
+  "27_15405636": {
+   "passed": true,
+   "result": "passed"
+  },
+  "32_40133826": {
+   "passed": false,
+   "result": "failed: inconsistent use of tabs and spaces in indentation (<string>, line 5)"
+  },
+  "38_1592158": {
+   "passed": true,
+   "result": "passed"
+  },
+  "48_20573459": {
+   "passed": true,
+   "result": "passed"
+  },
+  "51_23164058": {
+   "passed": true,
+   "result": "passed"
+  },
+  "55_11236006": {
+   "passed": true,
+   "result": "passed"
+  },
+  "64_4172131": {
+   "passed": true,
+   "result": "passed"
+  },
+  "65_6677332": {
+   "passed": true,
+   "result": "passed"
+  },
+  "74_17238587": {
+   "passed": false,
+   "result": "failed: inconsistent use of tabs and spaces in indentation (<string>, line 5)"
+  },
+  "76_15534223": {
+   "passed": true,
+   "result": "passed"
+  },
+  "78_18168684": {
+   "passed": true,
+   "result": "passed"
+  },
+  "80_19068269": {
+   "passed": true,
+   "result": "passed"
+  },
+  "82_30693804": {
+   "passed": true,
+   "result": "passed"
+  },
+  "83_30693804": {
+   "passed": true,
+   "result": "passed"
+  },
+  "94_18785032": {
+   "passed": true,
+   "result": "passed"
+  },
+  "95_1450897": {
+   "passed": true,
+   "result": "passed"
+  },
+  "102_2600191": {
+   "passed": true,
+   "result": "passed"
+  },
+  "103_2600191": {
+   "passed": true,
+   "result": "passed"
+  },
+  "117_3880399": {
+   "passed": true,
+   "result": "passed"
+  },
+  "127_22882922": {
+   "passed": true,
+   "result": "passed"
+  },
+  "150_9760588": {
+   "passed": true,
+   "result": "passed"
+  }
+ },
+ "selected": [
+  "10_26153795",
+  "21_2195340",
+  "27_15405636",
+  "38_1592158",
+  "48_20573459",
+  "51_23164058",
+  "55_11236006",
+  "64_4172131"
+ ]
+}

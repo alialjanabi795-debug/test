@@ -169,7 +169,7 @@ class AdapterTests(unittest.TestCase):
     @unittest.skipUnless(importlib.util.find_spec('rank_bm25'), 'rank_bm25 not installed')
     def test_bm25_ties_by_corpus_order(self):
         import rank_bm25
-        docs = [{'id': str(i), 'title': '', 'text': t} for i, t in enumerate(['a b', 'c d', 'a b', 'e f'])]
+        docs = [{'id': str(i), 'title': '', 'text': t} for i, t in enumerate(['a b', 'c d', 'a b', 'e f', 'g h', 'i j'])]
         bm = rank_bm25.BM25Okapi([d['text'].split(' ') for d in docs])
         top = retrieve_bm25.retrieve(bm, docs, 'a', 3)
         self.assertEqual([d['id'] for d in top[:2]], ['0', '2'])
