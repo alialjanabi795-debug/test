@@ -1,0 +1,98 @@
+{
+ "passed": 23,
+ "total": 23,
+ "rows": {
+  "10_26153795|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "10_26153795|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "10_26153795|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "21_2195340|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "21_2195340|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "21_2195340|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "27_15405636|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "27_15405636|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "38_1592158|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "38_1592158|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "38_1592158|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "48_20573459|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "48_20573459|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "48_20573459|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "51_23164058|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "51_23164058|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "51_23164058|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "55_11236006|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "55_11236006|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "55_11236006|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  },
+  "64_4172131|none": {
+   "passed": true,
+   "result": "passed"
+  },
+  "64_4172131|r1+r2": {
+   "passed": true,
+   "result": "passed"
+  },
+  "64_4172131|r2+r3": {
+   "passed": true,
+   "result": "passed"
+  }
+ }
+}

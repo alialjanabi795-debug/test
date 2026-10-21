@@ -1,0 +1,354 @@
+{
+  "IMPORTANT": "Real benchmarks must be run externally. This script analyzes supplied pass/fail records only. Oracle and observed-utility greedy are retrospective and are not deployable.",
+  "num_results": 615,
+  "num_manifest_tasks": 8,
+  "num_analyzed_tasks": 8,
+  "num_incomplete_tasks": 0,
+  "exploratory_thresholds": {
+    "positive_interaction": 0.2,
+    "complementary_single_max": 0.2,
+    "complementary_pair_min": 0.8,
+    "swing_strong_spread": 0.4
+  },
+  "overall": {
+    "num_tasks": 8,
+    "metrics": {
+      "swing_raw": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "swing_strong_exploratory": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "has_positive_interaction": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "has_complementary_pair": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_headroom": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "greedy_regret": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "topk_utility": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "oracle_utility": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      },
+      "greedy_utility": {
+        "mean": 0.0,
+        "95pct_task_bootstrap": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "per_dataset": {
+    "odex-en": {
+      "num_tasks": 8,
+      "metrics": {
+        "swing_raw": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "swing_strong_exploratory": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "has_positive_interaction": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "has_complementary_pair": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "oracle_headroom": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "greedy_regret": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "topk_utility": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "oracle_utility": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        },
+        "greedy_utility": {
+          "mean": 0.0,
+          "95pct_task_bootstrap": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "10_26153795",
+      "dataset": "odex-en",
+      "group": "datetime",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "21_2195340",
+      "dataset": "odex-en",
+      "group": "re",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "27_15405636",
+      "dataset": "odex-en",
+      "group": "argparse",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r2+r3",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r2+r3",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 6,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 11
+    },
+    {
+      "task_id": "38_1592158",
+      "dataset": "odex-en",
+      "group": "struct",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "48_20573459",
+      "dataset": "odex-en",
+      "group": "datetime",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "51_23164058",
+      "dataset": "odex-en",
+      "group": "base64",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "55_11236006",
+      "dataset": "odex-en",
+      "group": "collections",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    },
+    {
+      "task_id": "64_4172131",
+      "dataset": "odex-en",
+      "group": "random",
+      "swing_raw": 0,
+      "swing_spread": 0.0,
+      "swing_strong_exploratory": 0,
+      "topk_utility": 0.0,
+      "topk_subset": "r1+r2",
+      "oracle_utility": 0.0,
+      "oracle_subset": "none",
+      "oracle_headroom": 0.0,
+      "greedy_utility": 0.0,
+      "greedy_subset": "r1+r2",
+      "greedy_regret": 0.0,
+      "interaction_max": 0.0,
+      "positive_interaction_pairs": 0,
+      "tested_pairs": 10,
+      "has_positive_interaction": 0,
+      "complementary_pairs_exploratory": [],
+      "has_complementary_pair": 0,
+      "sample_count_min": 5,
+      "sample_count_max": 5,
+      "subsets_tested": 16
+    }
+  ],
+  "incomplete": []
+}

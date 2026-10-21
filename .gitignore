@@ -1,4 +1,2 @@
 __pycache__/
 *.pyc
-# in-progress run; committed when complete
-run_out/
