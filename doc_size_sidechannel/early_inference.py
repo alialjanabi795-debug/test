@@ -222,7 +222,7 @@ def plot(summary, reach, n_cls, out):
     for sp in ("top", "right"):
         ax.spines[sp].set_visible(False)
     ax.tick_params(colors=ink2)
-    ax.legend(frameon=False, fontsize=8, loc="lower right", labelcolor=ink)
+    ax.legend(frameon=False, fontsize=8, loc="center right", labelcolor=ink)
     fig.tight_layout()
     fig.savefig(os.path.join(out, "accuracy_vs_bytes.png"), facecolor=bg)
 

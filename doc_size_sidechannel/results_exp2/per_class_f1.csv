@@ -1,0 +1,9 @@
+label,JPEG q=85 — total size,PNG lossless — total size,Progressive JPEG — total size,JPEG XL lossless — total size,Progressive JPEG — per-scan sizes (7 features)
+driving_licence,0.5467,0.8454,0.5415,0.8993,1.0000
+email,0.6357,0.5877,0.6344,0.5753,0.7291
+form,0.1079,0.2560,0.1343,0.2296,0.3807
+id_card,0.6054,0.8301,0.5735,0.8543,1.0000
+invoice,0.2418,0.2680,0.2531,0.2077,0.4198
+letter,0.1056,0.1984,0.1731,0.2103,0.3358
+passport,0.6760,0.9253,0.6783,0.9301,1.0000
+scientific_report,0.1111,0.1646,0.1277,0.2139,0.2865

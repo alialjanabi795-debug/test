@@ -5,3 +5,5 @@ matplotlib>=3.8
 pandas>=2.1
 pyarrow>=14
 imagecodecs>=2024.1.1   # optional: JPEG XL via libjxl
+torch>=2.2              # Exp 3 only (CPU build is fine)
+transformers>=4.40      # Exp 3 only

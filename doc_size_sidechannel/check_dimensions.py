@@ -1,7 +1,10 @@
 import os, sys, pandas as pd, numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from size_attack import attack
-d = pd.read_csv(sys.argv[1]); y = np.asarray(d.label.astype(str).tolist())
+d = pd.read_csv(sys.argv[1])  # usage: check_dimensions.py SIZES_CSV [LABEL ...]
+if len(sys.argv) > 2:
+    d = d[d.label.isin(sys.argv[2:])].reset_index(drop=True)
+y = np.asarray(d.label.astype(str).tolist())
 px = (d.width * d.height).values
 print("dims range: w", d.width.min(), d.width.max(), " h", d.height.min(), d.height.max(), " distinct (w,h):", len(d.groupby(['width','height'])))
 for f in ["jpeg_q85", "jxl"]:

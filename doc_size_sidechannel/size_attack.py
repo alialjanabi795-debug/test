@@ -334,6 +334,7 @@ def main():
     ap.add_argument("--max-side", type=int, help="downscale so the longest side is at most this")
     ap.add_argument("--trees", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--only", nargs="+", metavar="LABEL", help="attack only these classes")
     ap.add_argument("--workers", type=int, default=os.cpu_count())
     args = ap.parse_args()
     if not (args.labels or args.images or args.sizes):
@@ -355,6 +356,8 @@ def main():
         write_sizes(recs, fmts, max(len(r["scans"]) for r in recs),
                     os.path.join(args.out, "sizes.csv"))
 
+    if args.only:
+        recs = [r for r in recs if r["label"] in set(args.only)]
     n_cls = len({r["label"] for r in recs})
     print(f"running attacks on {len(recs)} images, {n_cls} classes")
     rows, y, preds = run_experiments(recs, fmts, args.k, args.buckets, args.seed, args.trees)
