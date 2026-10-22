@@ -12,7 +12,8 @@ Pipeline (one command, rerunnable on any folder of labelled images):
        (ii) the vector of progressive-scan sizes.
   3. Defense: pad each observed size up to the next of K bucket edges
      (K = 2, 4, 8 by default) and rerun the attack; report bandwidth overhead.
-  4. Write sizes.csv, results.csv, results.md and attack_vs_overhead.png.
+  4. Write sizes.csv, results.csv, results.md, per_class_f1.csv and
+     attack_vs_overhead.png.
 
 Input, either:
   --labels labels.csv   CSV with columns path,label (paths relative to the CSV)
@@ -21,8 +22,10 @@ Input, either:
 Usage:
   python size_attack.py --labels data/rvlcdip/labels.csv --out results/
   python size_attack.py --images /srv/docs --out results/ --k 2 4 8 16
+  python size_attack.py --labels mix/labels.csv --gray --max-side 1000 --out results/
 """
 import argparse, csv, io, os, sys
+from functools import partial
 from multiprocessing import Pool
 
 import numpy as np
@@ -92,7 +95,7 @@ def jpeg_scan_sizes(data):
     return [bounds[j + 1] - bounds[j] for j in range(len(bounds) - 1)]
 
 
-def encode_one(item):
+def encode_one(item, gray=False, max_side=None):
     path, label = item
     try:
         img = Image.open(path)
@@ -101,6 +104,10 @@ def encode_one(item):
         return None, f"{path}: {e}"
     if img.mode not in ("L", "RGB"):
         img = img.convert("RGB" if img.mode in ("RGBA", "P", "CMYK", "YCbCr", "LA") else "L")
+    if gray and img.mode != "L":
+        img = img.convert("L")
+    if max_side and max(img.size) > max_side:
+        img.thumbnail((max_side, max_side), Image.LANCZOS)
     rec = {"path": path, "label": label, "width": img.width, "height": img.height,
            "mode": img.mode}
 
@@ -116,10 +123,11 @@ def encode_one(item):
     return rec, None
 
 
-def encode_all(items, workers):
+def encode_all(items, workers, gray=False, max_side=None):
     recs, errs = [], []
     with Pool(workers) as pool:
-        for k, (rec, err) in enumerate(pool.imap(encode_one, items, chunksize=8), 1):
+        fn = partial(encode_one, gray=gray, max_side=max_side)
+        for k, (rec, err) in enumerate(pool.imap(fn, items, chunksize=8), 1):
             (recs.append(rec) if rec else errs.append(err))
             if k % 250 == 0:
                 print(f"  encoded {k}/{len(items)}", flush=True)
@@ -182,15 +190,20 @@ def attack(X, y, seed, trees):
     """Random Forest, stratified 5-fold CV. min_samples_leaf is picked by an
     inner 3-fold CV on each training fold: with only 1-2 noisy continuous
     features an unregularised forest overfits badly and understates the leak."""
+    from sklearn.base import clone
     from sklearn.ensemble import RandomForestClassifier
-    from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_validate
+    from sklearn.metrics import accuracy_score, f1_score
+    from sklearn.model_selection import GridSearchCV, StratifiedKFold
     rf = RandomForestClassifier(n_estimators=trees, random_state=seed)
     clf = GridSearchCV(rf, {"min_samples_leaf": [1, 5, 20, 50]}, scoring="accuracy",
                        cv=StratifiedKFold(n_splits=3, shuffle=True, random_state=seed), n_jobs=-1)
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
-    s = cross_validate(clf, X, y, cv=cv, scoring=("accuracy", "f1_macro"))
-    return (s["test_accuracy"].mean(), s["test_accuracy"].std(),
-            s["test_f1_macro"].mean(), s["test_f1_macro"].std())
+    acc, f1, pred = [], [], np.empty_like(y)
+    for tr, te in cv.split(X, y):
+        pred[te] = clone(clf).fit(X[tr], y[tr]).predict(X[te])
+        acc.append(accuracy_score(y[te], pred[te]))
+        f1.append(f1_score(y[te], pred[te], average="macro"))
+    return np.mean(acc), np.std(acc), np.mean(f1), np.std(f1), pred
 
 
 def run_experiments(recs, fmts, ks, scheme, seed, trees):
@@ -204,12 +217,14 @@ def run_experiments(recs, fmts, ks, scheme, seed, trees):
     feature_sets.append((f"Progressive JPEG — per-scan sizes ({n_scan} features)",
                          "pjpeg_scans", scans))
 
-    rows = []
+    rows, preds = [], {}
     for name, key, X in feature_sets:
         base = X.sum()
         for k in [None] + list(ks):
             Xk = X if k is None else pad_matrix(X, k, scheme)
-            acc, acc_sd, f1, f1_sd = attack(Xk, y, seed, trees)
+            acc, acc_sd, f1, f1_sd, pred = attack(Xk, y, seed, trees)
+            if k is None:
+                preds[name] = pred
             rows.append({"features": name, "key": key, "K": "none" if k is None else k,
                          "overhead_pct": 100 * (Xk.sum() / base - 1),
                          "accuracy": acc, "accuracy_sd": acc_sd,
@@ -220,12 +235,25 @@ def run_experiments(recs, fmts, ks, scheme, seed, trees):
     # Control: dimensions only. Not visible through TLS, but tells us how much
     # of the size signal is just "this class is scanned at a different size".
     Xwh = np.array([[r["width"], r["height"]] for r in recs], float)
-    acc, acc_sd, f1, f1_sd = attack(Xwh, y, seed, trees)
+    acc, acc_sd, f1, f1_sd, _ = attack(Xwh, y, seed, trees)
     rows.append({"features": "Control: image width & height (not on the wire)", "key": "wh",
                  "K": "none", "overhead_pct": 0.0, "accuracy": acc, "accuracy_sd": acc_sd,
                  "macro_f1": f1, "macro_f1_sd": f1_sd})
     print(f"  control W,H  acc={acc:.3f}  F1={f1:.3f}")
-    return rows
+    return rows, y, preds
+
+
+def write_per_class(y, preds, out):
+    """Per-class F1 of each unpadded attack (out-of-fold predictions)."""
+    from sklearn.metrics import f1_score
+    labels = sorted(set(y))
+    names = list(preds)
+    table = {n: f1_score(y, preds[n], labels=labels, average=None) for n in names}
+    with open(os.path.join(out, "per_class_f1.csv"), "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["label"] + names)
+        for i, lab in enumerate(labels):
+            w.writerow([lab] + [f"{table[n][i]:.4f}" for n in names])
 
 
 # ---------------------------------------------------------------- outputs
@@ -302,6 +330,8 @@ def main():
     ap.add_argument("--k", type=int, nargs="+", default=[2, 4, 8])
     ap.add_argument("--buckets", choices=["quantile", "log"], default="quantile",
                     help="bucket edges: equal-frequency quantiles (default) or log-spaced")
+    ap.add_argument("--gray", action="store_true", help="convert every image to greyscale first")
+    ap.add_argument("--max-side", type=int, help="downscale so the longest side is at most this")
     ap.add_argument("--trees", type=int, default=200)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--workers", type=int, default=os.cpu_count())
@@ -321,14 +351,15 @@ def main():
             print("libjxl not available (pip install imagecodecs); skipping JPEG XL")
         items = load_items(args)
         print(f"encoding {len(items)} images with {args.workers} workers")
-        recs = encode_all(items, args.workers)
+        recs = encode_all(items, args.workers, args.gray, args.max_side)
         write_sizes(recs, fmts, max(len(r["scans"]) for r in recs),
                     os.path.join(args.out, "sizes.csv"))
 
     n_cls = len({r["label"] for r in recs})
     print(f"running attacks on {len(recs)} images, {n_cls} classes")
-    rows = run_experiments(recs, fmts, args.k, args.buckets, args.seed, args.trees)
+    rows, y, preds = run_experiments(recs, fmts, args.k, args.buckets, args.seed, args.trees)
     write_results(rows, len(recs), n_cls, args.out)
+    write_per_class(y, preds, args.out)
     plot(rows, n_cls, args.out)
     print(f"wrote {args.out}/results.md, results.csv, attack_vs_overhead.png")
 
